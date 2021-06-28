@@ -1,10 +1,10 @@
 from flask import Blueprint, Flask
 
-events = Blueprint('/', __name__)
+v1_router = Blueprint('v1', __name__, url_prefix='/v1')
 
-@events.get('/')
-def teste():
-    return 'aloooooo'
+from .events_router import events_router
+v1_router.register_blueprint( events_router )
 
-def config_routes( app : Flask ):
-    app.register_blueprint( events )
+
+def config_routes(app : Flask):
+    app.register_blueprint(v1_router)
