@@ -1,6 +1,14 @@
 from .db_connector import DatabaseConnector
 
+import datetime
+
+from sqlalchemy import Column, BigInteger, DateTime
+
 class BaseModel(DatabaseConnector):
+    
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
+
     def __init__(self):
         self.metadata.create_all(DatabaseConnector.get_engine())
         super().__init__()
@@ -28,10 +36,30 @@ class BaseModel(DatabaseConnector):
             return data
         except Exception as e:
             raise e
-
-    def from_dict(self, dict):
+    
+    @classmethod
+    def from_dict(cls, dict):
+        model = cls()
         try:
-            self.__dict__ = dict
+            model.__dict__.update( dict )
         except Exception as e:
             raise e
+        finally:
+            return model
 
+    def __repr__(self):
+        return str(self.__dict__)
+
+    def __str__(self):
+        return str(self.__dict__)
+        
+    @classmethod
+    def search(cls, **kwargs):
+        try:
+            with DatabaseConnector.get_session() as session:
+                query = session.query(cls)
+                for key, value in kwargs.items():
+                    query = query.filter( cls.__dict__[key] == value )
+                return query.all()
+        except Exception as e:
+            raise e

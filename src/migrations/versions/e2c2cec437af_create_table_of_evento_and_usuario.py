@@ -9,9 +9,8 @@ from alembic import op
 
 from sqlalchemy import Column, Date, BigInteger, String, ForeignKey, Integer, CheckConstraint
 
-from src.database import BaseModel, DatabaseConnector
-from src.model.schema import Usuario
-from src.enums import ModalidadeEnum, EsportesEnum
+from model.schema import Usuario
+from enums import ModalidadeEnum, EsportesEnum
 
 # revision identifiers, used by Alembic.
 revision = 'e2c2cec437af'
