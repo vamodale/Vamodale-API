@@ -26,9 +26,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    # serve(app, listen='*:3333')
-    if os.getenv( FLASK_ENV ) == "development":
-        app.run( port=os.getenv( API_PORT ), 
-                debug=os.getenv( FLASK_DEBUG ) )
-    else:
-        app.run( port=os.getenv("PORT"), host='0.0.0.0' )
+    app.run( port=os.getenv("PORT"), host='0.0.0.0' )
