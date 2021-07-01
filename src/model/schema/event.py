@@ -4,6 +4,7 @@ from sqlalchemy import Column, BigInteger, String, ForeignKey, Integer, CheckCon
 
 from database import BaseModel, DatabaseConnector
 from model.schema import Usuario
+from model.dto import EventDTO
 from enums import ModalidadeEnum, EsportesEnum
 
 class Event( BaseModel, DatabaseConnector.get_base_model() ):
@@ -11,7 +12,7 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
 
     id_criador = Column(BigInteger, ForeignKey(Usuario.id), nullable=False)
     nome = Column(String(100), nullable=False)
-    esporte = Column(Integer, CheckConstraint( f"modalidade IN {EsportesEnum.to_sql_list()}" ), nullable=False )
+    esporte = Column(Integer, CheckConstraint( f"esporte IN {EsportesEnum.to_sql_list()}" ), nullable=False )
     coord_x = Column(Integer, nullable=False)
     coord_y = Column(Integer, nullable=False)
     data_evento = Column(DateTime, nullable=False)

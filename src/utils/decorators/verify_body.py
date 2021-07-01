@@ -9,7 +9,7 @@ def verify_request_body( cls : BaseModel ):
         @wraps(func)
         def wrapper( *args, **kwargs ):
             body = request.json
-            for event_param, column in ( items for items in vars(cls).items() if not items[0].startswith('_') ):
+            for event_param, column in ( items for items in vars(cls).items() if not items[0].startswith('_') and not callable(items[1]) ):
                 if event_param in ("id", "created_at") or column.nullable:
                     continue
                 if body.get( event_param ) is None:

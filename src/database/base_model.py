@@ -1,5 +1,5 @@
 from .db_connector import DatabaseConnector
-
+from time import sleep
 import datetime
 
 from sqlalchemy import Column, BigInteger, DateTime
@@ -22,12 +22,12 @@ class BaseModel(DatabaseConnector):
             raise e
         
     def save(self) -> None:
-        try:
-            with self.get_session() as session:
+        with self.get_session() as session:
+            try:
                 session.add(self)
-        except Exception as e:
-            raise e
-    
+            except Exception as e:
+                raise e
+
     def to_dict(self) -> dict:
         try:
             data = self.__dict__
