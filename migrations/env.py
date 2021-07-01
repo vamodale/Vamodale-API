@@ -44,12 +44,7 @@ def run_migrations_offline():
 
     """
     context.configure(
-        url = f"{os.environ.get('DB_ENGINE')}://" \
-            f"{os.environ.get('DB_USER')}:" \
-            f"{os.environ.get('DB_PASS')}@" \
-            f"{os.environ.get('DB_SERVER')}:" \
-            f"{os.environ.get('DB_PORT')}/" \
-            f"{os.environ.get('DB_NAME')}",
+        url = f"{os.environ.get('DATABASE_URL')},
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
@@ -70,12 +65,7 @@ def run_migrations_online():
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
-        url = f"{os.environ.get('DB_ENGINE')}://" \
-            f"{os.environ.get('DB_USER')}:" \
-            f"{os.environ.get('DB_PASS')}@" \
-            f"{os.environ.get('DB_SERVER')}:" \
-            f"{os.environ.get('DB_PORT')}/" \
-            f"{os.environ.get('DB_NAME')}",
+        url = f"{os.environ.get('DATABASE_URL')},
     )
 
     with connectable.connect() as connection:
