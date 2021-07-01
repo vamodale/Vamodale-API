@@ -1,1 +1,1 @@
-from .events import Events
+from .events_dto import EventDTO

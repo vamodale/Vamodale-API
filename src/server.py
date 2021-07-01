@@ -8,7 +8,7 @@ SERVER_CONFIG_FILENAME = 'SERVER_CONFIG_FILENAME'
 FLASK_INSTANCE_RELATIVE_CONFIG = 'FLASK_INSTANCE_RELATIVE_CONFIG'
 
 def create_app():
-    load_dotenv('config/.env')
+    load_dotenv('../config/.env')
 
     app = Flask( __name__)
 
@@ -16,6 +16,9 @@ def create_app():
 
     from routes import config_routes
     config_routes(app)
+
+    from error import config_error_handler
+    config_error_handler(app)
 
     return app
 
