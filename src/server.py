@@ -7,6 +7,7 @@ API_PORT = 'API_PORT'
 FLASK_DEBUG = 'FLASK_DEBUG'
 SERVER_CONFIG_FILENAME = 'SERVER_CONFIG_FILENAME'
 FLASK_INSTANCE_RELATIVE_CONFIG = 'FLASK_INSTANCE_RELATIVE_CONFIG'
+FLASK_ENV = 'FLASK_ENV'
 
 def create_app():
     load_dotenv('config/.env')
@@ -26,5 +27,8 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     # serve(app, listen='*:3333')
-    app.run( port=os.getenv( API_PORT ), 
-            debug=os.getenv( FLASK_DEBUG ) )
+    if os.getenv( FLASK_ENV ) == "development":
+        app.run( port=os.getenv( API_PORT ), 
+                debug=os.getenv( FLASK_DEBUG ) )
+    else:
+        app.run( port=os..getenv("PORT") )
