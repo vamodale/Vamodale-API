@@ -1,6 +1,7 @@
 import os, json
 from dotenv import load_dotenv
 from flask import Flask
+from waitress import serve
 
 API_PORT = 'API_PORT'
 FLASK_DEBUG = 'FLASK_DEBUG'
@@ -8,7 +9,7 @@ SERVER_CONFIG_FILENAME = 'SERVER_CONFIG_FILENAME'
 FLASK_INSTANCE_RELATIVE_CONFIG = 'FLASK_INSTANCE_RELATIVE_CONFIG'
 
 def create_app():
-    load_dotenv('../config/.env')
+    load_dotenv('config/.env')
 
     app = Flask( __name__)
 
@@ -24,5 +25,6 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
+    # serve(app, listen='*:3333')
     app.run( port=os.getenv( API_PORT ), 
             debug=os.getenv( FLASK_DEBUG ) )
