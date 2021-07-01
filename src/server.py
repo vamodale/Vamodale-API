@@ -31,4 +31,4 @@ if __name__ == '__main__':
         app.run( port=os.getenv( API_PORT ), 
                 debug=os.getenv( FLASK_DEBUG ) )
     else:
-        app.run( port=os.getenv("PORT") )
+        app.run( port=os.getenv("PORT"), host='0.0.0.0' )
