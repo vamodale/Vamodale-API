@@ -10,7 +10,7 @@ FLASK_INSTANCE_RELATIVE_CONFIG = 'FLASK_INSTANCE_RELATIVE_CONFIG'
 def create_app():
     load_dotenv('config/.env')
 
-    app = Flask( __name__)
+    app = Flask(__name__)
 
     app.config.from_file( os.getenv( SERVER_CONFIG_FILENAME ), load=json.load )
 

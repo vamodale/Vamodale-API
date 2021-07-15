@@ -13,6 +13,7 @@ class EventDTO:
     coordenadas_local = Tuple[int]
     
     def __init__(self, event):
+        self.nome = event.nome
         self.data = event.data_evento
         self.id_criador = event.id_criador
         self.esporte = EsportesEnum(event.esporte).name
