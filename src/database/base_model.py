@@ -37,6 +37,9 @@ class BaseModel(DatabaseConnector):
         except Exception as e:
             raise e
     
+    def bound_session( self, session ):
+        self._sa_instance_state.session_id = session.hash_key
+
     @classmethod
     def from_dict(cls, dict):
         model = cls()
