@@ -11,3 +11,7 @@ def insert_user( body : dict ):
     user = Usuario.from_dict(body)
     users_service.save_user(user)
     return UserDTO( user ).to_dict(), 200
+
+def get_all_users():
+    users = users_service.get_all_users()
+    return users
