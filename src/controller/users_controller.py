@@ -13,6 +13,10 @@ def insert_user( body : dict ):
     users_service.save_user(user)
     return UserDTO( user ).to_dict(), 200
 
+def get_all_users():
+    users = users_service.get_all_users()
+    return users
+  
 def get_user( user_id ):
     user = users_service.get_user_by_id( user_id )
 
