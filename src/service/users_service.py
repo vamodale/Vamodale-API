@@ -1,10 +1,12 @@
-from model.schema import Usuario, Event
+from model.schema import Usuario
 
 def save_user( user : Usuario ):
     return user.save()
 
 def get_all_users():
-    users = Event.search()
+    users = Usuario.search()
     return users
 
-# TODO get_user_by_id method
+def get_user_by_id( user_id ):
+    user = Usuario.get_by_id( user_id )
+    return user

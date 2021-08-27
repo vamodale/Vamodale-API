@@ -1,6 +1,7 @@
 import datetime
 
-from sqlalchemy import Column, BigInteger, String, ForeignKey, Integer, CheckConstraint, DateTime
+from sqlalchemy import Column, BigInteger, String, ForeignKey, Integer, CheckConstraint, DateTime, inspect
+from sqlalchemy.orm import relationship, backref
 
 from database import BaseModel, DatabaseConnector
 from model.schema import Usuario
@@ -18,3 +19,21 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
     data_evento = Column(DateTime, nullable=False)
     modalidade = Column(Integer, CheckConstraint( f"modalidade IN {ModalidadeEnum.to_sql_list()}" ), nullable=False, default = 1 )
     num_vagas = Column(Integer, nullable=True)
+    jogadores = relationship( "Usuario", secondary='usuario_evento', backref=backref( "eventos", lazy='subquery' ) )
+ 
+    def add_jogador( self, user ):
+        with self.get_session() as session:
+            try:    
+                self.bound_session(session)
+                self.jogadores.append( user )
+            except Exception as e:
+                raise e
+
+    def get_jogadores( self ):
+        with self.get_session() as session:
+            try:    
+                self.bound_session(session)
+                return self.jogadores
+            except Exception as e:
+                raise e
+    

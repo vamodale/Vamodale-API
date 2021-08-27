@@ -4,7 +4,7 @@ from contextlib import contextmanager, asynccontextmanager
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.engine import Engine
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 
 
 
@@ -22,7 +22,7 @@ class DatabaseConnector:
         if cls.__sessionmaker is None:
             cls.__config()
         session = cls.__sessionmaker()
-
+        
         try:
             yield session
             session.commit()
