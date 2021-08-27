@@ -1,6 +1,7 @@
 from typing import List, Tuple
 from datetime import datetime
 
+from controller import users_controller
 from enums import ModalidadeEnum, EsportesEnum
 
 class EventDTO:
@@ -19,13 +20,15 @@ class EventDTO:
         self.nome = event.nome
         self.data = event.data_evento
         self.id_criador = event.id_criador
+        self.nome_criador = users_controller.get_user(event.id_criador).nome
         self.criador = f"/v1/users/{event.id_criador}"
         self.esporte = EsportesEnum(event.esporte).name
-        self.jogadores = {
-            "href": f"/v1/events/{event.id}/users/",
-            "rel": "users",
-            "type": "GET"
-        }
+        self.jogadores = [ {
+             'nome': user.nome,
+             'apelido': user.apelido,
+             'profile_picture': user.profile_picture, 
+             'href': f"/v1/users/{user.id}" 
+        } for user in event.get_jogadores() ]
         self.modalidade = ModalidadeEnum(event.modalidade).name 
         self.num_vagas = event.num_vagas if event.num_vagas is not None else None 
         self.coordenadas_local = { 'x': event.coord_x, 'y': event.coord_y }

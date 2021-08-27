@@ -28,3 +28,12 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
                 self.jogadores.append( user )
             except Exception as e:
                 raise e
+
+    def get_jogadores( self ):
+        with self.get_session() as session:
+            try:    
+                self.bound_session(session)
+                return self.jogadores
+            except Exception as e:
+                raise e
+    

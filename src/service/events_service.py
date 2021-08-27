@@ -22,3 +22,6 @@ def get_all_events():
 
 def insert_user_event( event : Event, user : Usuario ):
     return event.add_jogador( user )
+
+def get_users_event( event : Event ):
+    return event.get_jogadores()
