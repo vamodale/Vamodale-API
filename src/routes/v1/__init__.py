@@ -7,3 +7,6 @@ v1_router.register_blueprint( events_router )
 
 from .users_router import users_router
 v1_router.register_blueprint( users_router )
+
+from .auth_router import auth_router
+v1_router.register_blueprint( auth_router )
