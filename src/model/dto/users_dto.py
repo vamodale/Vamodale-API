@@ -15,10 +15,6 @@ class UserDTO:
         self.nome = user.nome
         self.apelido = user.apelido
         self.genero = user.genero
-
-        #TODO Relacionar usuario ao esporte
-        # self.esporte = EsportesEnum(user.esporte).name
-        self.esportes = list()
         self.idade = user.idade
         self.cidade = user.cidade
         self.profile_picture = user.profile_picture

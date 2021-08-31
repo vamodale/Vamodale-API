@@ -1,5 +1,6 @@
 import traceback
 
+from jwt import ExpiredSignatureError
 from flask import Flask
 from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import IntegrityError
@@ -49,3 +50,9 @@ def config_error_handler(app: Flask):
         app.logger.debug(traceback.format_exc())
         app.logger.error(err)
         return { "error": err.msg }, err.status
+
+    @app.errorhandler( ExpiredSignatureError )
+    def event_not_found_handler(err):
+        app.logger.debug(traceback.format_exc())
+        app.logger.error(err)
+        return { "error": err.msg }, 401

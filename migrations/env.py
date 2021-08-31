@@ -22,8 +22,14 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from database import DatabaseConnector
+from model.schema import Event, Usuario
+Event()
+Usuario()
+from database import create_db, DatabaseConnector
+create_db()
+
 target_metadata = DatabaseConnector.get_base_model().metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

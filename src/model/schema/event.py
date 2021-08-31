@@ -14,12 +14,15 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
     id_criador = Column(BigInteger, ForeignKey(Usuario.id), nullable=False)
     nome = Column(String(100), nullable=False)
     esporte = Column(Integer, CheckConstraint( f"esporte IN {EsportesEnum.to_sql_list()}" ), nullable=False )
-    coord_x = Column(Integer, nullable=False)
-    coord_y = Column(Integer, nullable=False)
+    bairro = Column(String(255), nullable=False)
+    rua = Column(String(255), nullable=False)
+    complemento = Column(String(255), nullable=True)
+    cep = Column(String(10), nullable=False)
+    numero = Column(Integer, nullable=False)
     data_evento = Column(DateTime, nullable=False)
     modalidade = Column(Integer, CheckConstraint( f"modalidade IN {ModalidadeEnum.to_sql_list()}" ), nullable=False, default = 1 )
     num_vagas = Column(Integer, nullable=True)
-    jogadores = relationship( "Usuario", secondary='usuario_evento', backref=backref( "eventos", lazy='subquery' ) )
+    jogadores = relationship( "Usuario", secondary='usuario_evento', backref=backref( "eventos", lazy='subquery' ), cascade="all, delete" )
  
     def add_jogador( self, user ):
         with self.get_session() as session:

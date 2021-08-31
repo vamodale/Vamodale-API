@@ -12,7 +12,7 @@ class EventDTO:
     jogadores = List[int]
     modalidade = ModalidadeEnum.CASUAL
     num_vagas = int()
-    coordenadas_local = Tuple[int]
+    endereco = dict()
     criador = str()
     
     def __init__(self, event):
@@ -31,7 +31,13 @@ class EventDTO:
         } for user in event.get_jogadores() ]
         self.modalidade = ModalidadeEnum(event.modalidade).name 
         self.num_vagas = event.num_vagas if event.num_vagas is not None else None 
-        self.coordenadas_local = { 'x': event.coord_x, 'y': event.coord_y }
+        self.endereco = {
+            'cep': event.cep,
+            'rua': event.rua,
+            'bairro': event.bairro,
+            'numero': event.numero,
+            'complemento': event.complemento
+        }
 
     def to_dict(self):
         return self.__dict__

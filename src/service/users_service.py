@@ -10,3 +10,10 @@ def get_all_users():
 def get_user_by_id( user_id ):
     user = Usuario.get_by_id( user_id )
     return user
+
+def get_events_user( user : Usuario ):
+    return user.get_events()
+
+def get_user_by_email_and_openid( email, openid ):
+    user = Usuario.login( email, openid )
+    return user

@@ -25,3 +25,6 @@ def insert_user_event( event : Event, user : Usuario ):
 
 def get_users_event( event : Event ):
     return event.get_jogadores()
+
+def edit_event( event : Event, new_event : dict ):
+    pass

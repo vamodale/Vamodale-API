@@ -3,7 +3,7 @@ from flask import request
 from model.schema import Event
 from service import events_service, users_service
 from utils.decorators import verify_request_body
-from error.exceptions import EventNotFound
+from error.exceptions import EventNotFound, UserNotAdmin
 from controller import users_controller
 
 # @verify_request_body( Event ) TOFIX
@@ -17,7 +17,7 @@ def get_all_events():
     events = events_service.get_all_events()
     return events
 
-def get_event( event_id ):
+def get_event( event_id ) -> Event:
     event = events_service.get_event_by_id( event_id )
 
     if not event:
@@ -30,8 +30,16 @@ def get_users_event( event_id ):
 
     return users
 
-def insert_user_event( event_id, user_id ):
+def insert_user_event( event_id, user ):
     event = get_event( event_id )
-    user = users_controller.get_user( user_id )
+    events_service.insert_user_event( event, user )
 
     return event
+
+def edit_event( event_id, new_event, user ):
+    event = get_event(event_id)
+
+    if event.id_criador != user.id:
+        raise UserNotAdmin
+    
+    event = events_service.edit_event( event_id, new_event )
