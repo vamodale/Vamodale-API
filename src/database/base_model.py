@@ -62,7 +62,10 @@ class BaseModel(DatabaseConnector):
             with DatabaseConnector.get_session() as session:
                 query = session.query(cls)
                 for key, value in kwargs.items():
-                    query = query.filter( funcfilter.lower( cls.__dict__[key] ) == funcfilter.lower( value ) )
+                    if type(value) is str:
+                        query = query.filter( funcfilter.lower( cls.__dict__[key] ) == funcfilter.lower( value ) )
+                    else:
+                        query = query.filter( cls.__dict__[key] == value )
                 return query.all()
         except Exception as e:
             raise e
