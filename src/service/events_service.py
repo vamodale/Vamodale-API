@@ -16,8 +16,8 @@ def get_event_by_id( event_id ):
     event = Event.get_by_id( event_id )
     return event
 
-def get_all_events():
-    events = Event.search()
+def get_all_events( user ):
+    events = Event.search( cidade = user.cidade)
     return events
 
 def insert_user_event( event : Event, user : Usuario ):

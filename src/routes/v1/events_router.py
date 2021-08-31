@@ -15,8 +15,9 @@ def post_events():
     return EventDTO( event ).to_dict(), 200
 
 @events_router.get('/')
+@validate_login
 def get_all_events():
-    events = events_controller.get_all_events()
+    events = events_controller.get_all_events( g.user )
     events = [ EventDTO( event ).to_dict() for event in events ]
     return jsonify(events), 200
 

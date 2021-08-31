@@ -15,6 +15,7 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
     nome = Column(String(100), nullable=False)
     esporte = Column(Integer, CheckConstraint( f"esporte IN {EsportesEnum.to_sql_list()}" ), nullable=False )
     bairro = Column(String(255), nullable=False)
+    cidade = Column(String(255), nullable=False)
     rua = Column(String(255), nullable=False)
     complemento = Column(String(255), nullable=True)
     cep = Column(String(10), nullable=False)
@@ -39,4 +40,4 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
                 return self.jogadores
             except Exception as e:
                 raise e
-    
+            

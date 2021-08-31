@@ -1,6 +1,7 @@
 from flask import request
 
 from model.schema import Event
+from utils.restease import get_city_from_cep
 from service import events_service, users_service
 from utils.decorators import verify_request_body
 from error.exceptions import EventNotFound, UserNotAdmin
@@ -9,12 +10,13 @@ from controller import users_controller
 # @verify_request_body( Event ) TOFIX
 def insert_events( body : dict ):
     events_service.validate_existence_event( body )
+    body['cidade'] = get_city_from_cep( body['cep'] )
     event = Event.from_dict(body)
     events_service.save_event(event)
     return event
 
-def get_all_events():
-    events = events_service.get_all_events()
+def get_all_events( user ):
+    events = events_service.get_all_events( user )
     return events
 
 def get_event( event_id ) -> Event:

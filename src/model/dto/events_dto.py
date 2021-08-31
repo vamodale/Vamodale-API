@@ -36,7 +36,8 @@ class EventDTO:
             'rua': event.rua,
             'bairro': event.bairro,
             'numero': event.numero,
-            'complemento': event.complemento
+            'complemento': event.complemento,
+            'cidade': event.cidade
         }
 
     def to_dict(self):

@@ -62,6 +62,9 @@ class BaseModel(DatabaseConnector):
             with DatabaseConnector.get_session() as session:
                 query = session.query(cls)
                 for key, value in kwargs.items():
+                    if type(value) is str:
+                        cls.__dict__[key].upper()
+                        value.upper()
                     query = query.filter( cls.__dict__[key] == value )
                 return query.all()
         except Exception as e:
