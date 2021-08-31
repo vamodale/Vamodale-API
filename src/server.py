@@ -6,6 +6,7 @@ API_PORT = 'API_PORT'
 FLASK_DEBUG = 'FLASK_DEBUG'
 SERVER_CONFIG_FILENAME = 'SERVER_CONFIG_FILENAME'
 FLASK_INSTANCE_RELATIVE_CONFIG = 'FLASK_INSTANCE_RELATIVE_CONFIG'
+FLASK_ENV = 'FLASK_ENV'
 
 def create_app():
     if not os.environ.get("FLASK_ENV", None):
@@ -28,5 +29,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run( port=os.getenv( API_PORT ), 
-            debug=os.getenv( FLASK_DEBUG ) )
+    app.run( port=os.getenv("PORT"), host='0.0.0.0' )

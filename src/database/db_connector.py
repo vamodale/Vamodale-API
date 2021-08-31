@@ -52,12 +52,7 @@ class DatabaseConnector:
 
     @classmethod
     def __config(cls) -> None:
-        database_url = f"{os.environ.get('DB_ENGINE')}://" \
-                       f"{os.environ.get('DB_USER')}:" \
-                       f"{os.environ.get('DB_PASS')}@" \
-                       f"{os.environ.get('DB_SERVER')}:" \
-                       f"{os.environ.get('DB_PORT')}/" \
-                       f"{os.environ.get('DB_NAME')}"
+        database_url = f"{os.environ.get('DATABASE_URL')}"
         try:
             cls.__engine = create_engine( 
                             database_url, 
