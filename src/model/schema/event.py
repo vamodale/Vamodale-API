@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy import Column, BigInteger, String, ForeignKey, Integer, CheckConstraint, DateTime, inspect
+from sqlalchemy import Column, BigInteger, String, ForeignKey, Integer, CheckConstraint, DateTime, inspect, func
 from sqlalchemy.orm import relationship, backref
 
 from database import BaseModel, DatabaseConnector
@@ -40,4 +40,14 @@ class Event( BaseModel, DatabaseConnector.get_base_model() ):
                 return self.jogadores
             except Exception as e:
                 raise e
+
+    @classmethod
+    def get_events_by_city(cls, city):
+        try:
+            with cls.get_session() as session:
+                query = session.query(cls)
+                query = query.filter( func.lower( cls.cidade ) == func.lower( city ) )
+                return query.all()
+        except Exception as e:
+            raise e
             
