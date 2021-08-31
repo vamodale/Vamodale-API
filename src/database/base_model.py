@@ -2,7 +2,7 @@ from .db_connector import DatabaseConnector
 from time import sleep
 import datetime
 
-from sqlalchemy import Column, BigInteger, DateTime
+from sqlalchemy import Column, BigInteger, DateTime, funcfilter
 
 class BaseModel(DatabaseConnector):
     
@@ -62,10 +62,7 @@ class BaseModel(DatabaseConnector):
             with DatabaseConnector.get_session() as session:
                 query = session.query(cls)
                 for key, value in kwargs.items():
-                    if type(value) is str:
-                        cls.__dict__[key].upper()
-                        value.upper()
-                    query = query.filter( cls.__dict__[key] == value )
+                    query = query.filter( funcfilter.lower( cls.__dict__[key] ) == funcfilter.lower( value ) )
                 return query.all()
         except Exception as e:
             raise e
