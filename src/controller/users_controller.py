@@ -31,8 +31,7 @@ def login( email, openid ):
         raise UserNotFound
     return user
 
-def get_events_user( user_id ):
-    user = get_user( user_id )
+def get_events_user( user ):
     events = users_service.get_events_user( user )
 
     return events

@@ -14,7 +14,6 @@ class UserDTO:
         self.id = user.id
         self.nome = user.nome
         self.apelido = user.apelido
-        self.genero = user.genero
         self.idade = user.idade
         self.cidade = user.cidade
         self.profile_picture = user.profile_picture
