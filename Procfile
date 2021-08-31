@@ -1,2 +1,2 @@
 release: alembic upgrade head
-web: python src\server.py
+web: python src/server.py
