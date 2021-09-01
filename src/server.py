@@ -1,6 +1,7 @@
 import os, json
 from dotenv import load_dotenv
 from flask import Flask
+from flask_cors import CORS
 
 API_PORT = 'API_PORT'
 FLASK_DEBUG = 'FLASK_DEBUG'
@@ -14,6 +15,8 @@ def create_app():
 
     app = Flask(__name__)
 
+    CORS(app)
+    
     from database import create_db
     create_db()
 
