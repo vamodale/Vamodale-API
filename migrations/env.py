@@ -23,8 +23,6 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from model.schema import Event, Usuario
-Event()
-Usuario()
 from database import create_db, DatabaseConnector
 create_db()
 

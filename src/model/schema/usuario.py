@@ -8,11 +8,10 @@ class Usuario(BaseModel, DatabaseConnector.get_base_model()):
     
     nome = sa.Column(sa.String(255), nullable=False)
     apelido = sa.Column(sa.String(60), nullable=True)
-    idade = sa.Column(sa.Integer, nullable=False)
     profile_picture = sa.Column(sa.String(255), nullable=True)
     cidade = sa.Column(sa.String(255), nullable=False)
     email = sa.Column(sa.String(255), nullable=False, unique=True)
-    openid = sa.Column(sa.BigInteger, nullable=False, unique=True)
+    openid = sa.Column(sa.String(), nullable=False, unique=True)
 
 
     def get_events( self ):
