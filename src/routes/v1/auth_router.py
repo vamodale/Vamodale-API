@@ -9,5 +9,5 @@ auth_router = Blueprint('auth', __name__, url_prefix='/auth')
 @auth_router.get('/login')
 @generate_token
 def login():
-    user = users_controller.login( request.json['email'], request.json['openid'] )
+    user = users_controller.login( request.args['email'], request.args['openid'] )
     return user
