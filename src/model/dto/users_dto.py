@@ -6,7 +6,6 @@ class UserDTO:
     apelido = str()
     esportes = List[int]
     genero = str()
-    idade = int()
     cidade = str()
     profile_picture = str()
     
@@ -14,7 +13,6 @@ class UserDTO:
         self.id = user.id
         self.nome = user.nome
         self.apelido = user.apelido
-        self.idade = user.idade
         self.cidade = user.cidade
         self.profile_picture = user.profile_picture
 
